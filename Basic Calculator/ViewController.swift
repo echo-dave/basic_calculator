@@ -44,22 +44,37 @@ class ViewController: UIViewController {
 
     @IBAction func tapFunction(sender: UISwipeGestureRecognizer) {
             print("tap working")
-        if numString.count > 1 {
-            numString.removeLast()
-            calcNumDisplay.text = numString
+            print("after tap: \(numString)")
+        if numString.count > 0 {
+            if numString[numString.startIndex] == "-" {
+                print("main if")
+                if numString.count > 1 {
+                    numString.removeLast()
+                    calcNumDisplay.text = numString.count == 1 ? "-0" : numString
+                } 
+            }  else if numString.count > 0 {
+                numString.removeLast()
+                calcNumDisplay.text = numString.count == 0 ? "0" : numString
+            }
         }
     }
     
     @IBAction func changePosNeg(_ sender: UIButton) {
 //        print(numString.first)
-        print(numString[numString.index(numString.startIndex, offsetBy: 0)])
-        if numString[numString.index(numString.startIndex, offsetBy: 0)] == "-" {
-            numString.remove(at: numString.startIndex)
-            print("numString after -/+ is: \(numString)")
+//        print(numString[numString.index(numString.startIndex, offsetBy: 0)])
+        if numString.count > 0 {
+            if numString[numString.index(numString.startIndex, offsetBy: 0)] == "-" {
+                numString.remove(at: numString.startIndex)
+                print("numString after -/+ is: \(numString)")
+                calcNumDisplay.text = numString.count == 0 ? "0" : numString
+            } else {
+                numString.insert("-", at: numString.startIndex)
+                calcNumDisplay.text = numString
+            }
         } else {
             numString.insert("-", at: numString.startIndex)
+            calcNumDisplay.text = "-0"
         }
-        calcNumDisplay.text = numString
         print("updated: \(numString)")
       
     }
@@ -85,9 +100,9 @@ class ViewController: UIViewController {
                 calculatedNum += opperatingNum
             case "-":
                 calculatedNum -= opperatingNum
-            case "=":
-                print("opperator for \"=\" \(prevOpperator)")
-                calculate(prevOpperator)
+//            case "=":
+//                print("opperator for \"=\" \(prevOpperator)")
+////                calculate("")
             default:
                 break
             }
@@ -96,7 +111,10 @@ class ViewController: UIViewController {
         }
         
         calcNumDisplay.text = String(calculatedNum)
-        if opperator != "=" { prevOpperator = opperator }
+        if opperator != "=" {
+            prevOpperator = opperator
+        } else { prevOpperator = ""}
+        
         print("clalc: \(calculatedNum)")
         print("opperating Num: \(opperatingNum)")
     }
