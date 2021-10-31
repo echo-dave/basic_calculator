@@ -14,6 +14,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.tapFunction))
+               calcNumDisplay.isUserInteractionEnabled = true
+        swipe.direction = .left
+               calcNumDisplay.addGestureRecognizer(swipe)
+        
     }
 
     let numArray = ["1","2","3","4","5","6","7","8","9","0","."]
@@ -35,7 +41,12 @@ class ViewController: UIViewController {
             calcNumDisplay.text = numString
         }
     }
-    
+
+    @IBAction func tapFunction(sender: UISwipeGestureRecognizer) {
+            print("tap working")
+        numString.removeLast()
+        calcNumDisplay.text = numString
+        }
     
     @IBAction func changePosNeg(_ sender: UIButton) {
 //        print(numString.first)
