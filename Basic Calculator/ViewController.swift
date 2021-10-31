@@ -36,6 +36,21 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func changePosNeg(_ sender: UIButton) {
+//        print(numString.first)
+        print(numString[numString.index(numString.startIndex, offsetBy: 0)])
+        if numString[numString.index(numString.startIndex, offsetBy: 0)] == "-" {
+            numString.remove(at: numString.startIndex)
+            print("numString after -/+ is: \(numString)")
+        } else {
+            numString.insert("-", at: numString.startIndex)
+        }
+        calcNumDisplay.text = numString
+        print("updated: \(numString)")
+      
+    }
+    
     @IBAction func setOpperator(_ sender: UIButton) {
 //        print(sender.titleLabel?.text)
         guard let opperator = sender.titleLabel?.text else {return}
