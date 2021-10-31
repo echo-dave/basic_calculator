@@ -44,9 +44,11 @@ class ViewController: UIViewController {
 
     @IBAction func tapFunction(sender: UISwipeGestureRecognizer) {
             print("tap working")
-        numString.removeLast()
-        calcNumDisplay.text = numString
+        if numString.count > 1 {
+            numString.removeLast()
+            calcNumDisplay.text = numString
         }
+    }
     
     @IBAction func changePosNeg(_ sender: UIButton) {
 //        print(numString.first)
