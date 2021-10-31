@@ -30,11 +30,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func convertPercentage(_ sender: UIButton) {
-        
+        if numString != "" && numString != "0" {
+            numString = String(Double(numString)! / 100)
+            calcNumDisplay.text = numString
+        }
     }
     
     @IBAction func setOpperator(_ sender: UIButton) {
-        print(sender.titleLabel?.text)
+//        print(sender.titleLabel?.text)
         guard let opperator = sender.titleLabel?.text else {return}
         calculate(opperator)
     }
